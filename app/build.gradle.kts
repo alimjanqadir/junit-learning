@@ -27,10 +27,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     // JUnit Jupiter testing library.
-    implementation("org.junit.jupiter:junit-jupiter:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 
 application {
     // Define the main class for the application.
     mainClass.set("junit.learning.AppKt")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
