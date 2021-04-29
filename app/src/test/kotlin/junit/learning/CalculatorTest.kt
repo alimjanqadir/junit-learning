@@ -3,14 +3,48 @@
  */
 package junit.learning
 
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
 
 
-class CalculatorTest {
+internal class CalculatorTest {
+    private val calculator = Calculator()
+
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun setup(): Unit {
+            println("CalculatorTest.setup")
+        }
+
+        @AfterAll
+        @JvmStatic
+        fun tear() {
+            println("CalculatorTest.tear")
+        }
+    }
+
+    @BeforeEach
+    fun setupThis() {
+        println("CalculatorTest.setupThis")
+    }
+
+    @Tag("DEV")
     @Test
     fun `1 + 1 = 2`() {
-        val calculator = Calculator()
+        println("CalculatorTest.1 + 1 = 2")
         assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2")
+    }
+
+    @Tag("PROD")
+    @Test
+    fun `2 + 1 = 3`() {
+        println("CalculatorTest.2 + 1 = 3")
+        assertEquals(3, calculator.add(2, 1))
+    }
+
+    @AfterEach
+    fun tearThis() {
+        println("CalculatorTest.tearThis")
     }
 }
